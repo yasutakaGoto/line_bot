@@ -2,8 +2,8 @@
 line bot hogehoge
 
 # env
-python 3.5.3
-Flask
+python 3.5.3  
+Flask  
 line-bot-sdk
 
 # server(heroku)
