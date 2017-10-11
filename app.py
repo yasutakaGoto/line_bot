@@ -12,10 +12,19 @@ from linebot.models import (
 
 app = Flask(__name__)
 
+# 環境変数からchannel_secret・channel_access_tokenを取得
+channel_secret = os.environ['LINE_CHANNEL_SECRET']
+channel_access_token = os.environ['LINE_CHANNEL_ACCESS_TOKEN']
 
+if channel_secret is None:
+    print('Specify LINE_CHANNEL_SECRET as environment variable.')
+    sys.exit(1)
+if channel_access_token is None:
+    print('Specify LINE_CHANNEL_ACCESS_TOKEN as environment variable.')
+    sys.exit(1)
 
-line_bot_api = LineBotApi('179w/TtDVAh5Ga3Wj5wyD729bLgCLqwO1QW0SybB4n1Zt+yU2WdlzdmWyYOxAIoZH7dFKC+xHWXrga0tCxplGbHYWxtwhfSF71P+V7lASb5wO7KnYjEiX2qtUls5gTooYuic4hXyCY9NotQgd743JgdB04t89/1O/w1cDnyilFU=')
-handler = WebhookHandler('b9e9b549a09e2eeb3dca73168a3c51fa')
+line_bot_api = LineBotApi(channel_access_token)
+handler = WebhookHandler(channel_secret)
 
 @app.route("/")
 def hello_world():
